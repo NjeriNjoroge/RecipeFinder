@@ -4,11 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_first_layout"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_search_black_24dp"
             android:title="Find a recipe" />
         <item
             android:id="@+id/nav_second_layout"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_chat_black_24dp"
             android:title="Ask a question" />
         <!--<item-->
             <!--android:id="@+id/nav_slideshow"-->

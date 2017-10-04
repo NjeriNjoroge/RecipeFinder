@@ -1,4 +1,4 @@
-package com.example.gnjoroge.recipefinder;
+package com.example.gnjoroge.recipefinder.ui;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.gnjoroge.recipefinder.R;
 
 /**
  * Created by gnjoroge on 10/4/17.
