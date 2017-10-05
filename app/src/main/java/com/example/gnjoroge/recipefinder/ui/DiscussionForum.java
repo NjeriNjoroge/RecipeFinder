@@ -27,6 +27,12 @@ import butterknife.ButterKnife;
 
 public class DiscussionForum extends AppCompatActivity {
 
+    //hiding the form fields after submit
+    private boolean viewGroupIsVisible = true;
+    private View mViewGroup;
+    private View mViewGroup1;
+    private View mViewGroup2;
+
     //displaying the questions
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
@@ -49,6 +55,7 @@ public class DiscussionForum extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
+
         //accessing the adapter created
         mAdapter = new PostDetailAdapter(getApplicationContext(), mPosts);
         mRecyclerView.setAdapter(mAdapter);
@@ -61,6 +68,11 @@ public class DiscussionForum extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //collect the ids for hiding the editText fields
+                mViewGroup = findViewById(R.id.titleField);
+                mViewGroup1 =  findViewById(R.id.bodyField);
+                mViewGroup2 =  findViewById(R.id.authorField);
+
                 String title = mInpuTitle.getText().toString();
                 mInpuTitle.setText("");
                 String author = mInputAuthor.getText().toString();
@@ -69,11 +81,23 @@ public class DiscussionForum extends AppCompatActivity {
                 mInputBody.setText("");
                 String newPost = title + author + body;
 
-               // Log.d("post", newPost);
-
-
                 Post post = new Post(title, author,body);
                 mAdapter.addPost(post);
+
+                //hiding the editText Fields
+                if(viewGroupIsVisible) {
+                    mViewGroup.setVisibility(View.GONE);
+                    mViewGroup1.setVisibility(View.GONE);
+                    mViewGroup2.setVisibility(View.GONE);
+                    mSubmitPost.setText("Ask Question");
+                } else {
+                    mViewGroup.setVisibility(View.VISIBLE);
+                    mViewGroup1.setVisibility(View.VISIBLE);
+                    mViewGroup2.setVisibility(View.VISIBLE);
+                    mSubmitPost.setText("Hide");
+                }
+
+                viewGroupIsVisible = !viewGroupIsVisible;
 
             }
         });
