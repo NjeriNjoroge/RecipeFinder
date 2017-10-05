@@ -62,9 +62,13 @@ public class DiscussionForum extends AppCompatActivity {
             public void onClick(View view) {
 
                 String title = mInpuTitle.getText().toString();
+                mInpuTitle.setText("");
                 String author = mInputAuthor.getText().toString();
+                mInputAuthor.setText("");
                 String body = mInputBody.getText().toString();
+                mInputBody.setText("");
                 String newPost = title + author + body;
+
                // Log.d("post", newPost);
 
 

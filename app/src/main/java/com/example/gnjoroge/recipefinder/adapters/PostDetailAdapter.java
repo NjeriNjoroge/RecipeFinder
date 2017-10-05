@@ -37,6 +37,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Po
         mContext = context;
         mPosts = posts;
     }
+
     public void addPost(Post post){
         mPosts.add(post);
         notifyDataSetChanged();
