@@ -10,7 +10,6 @@ import java.util.List;
  * Created by gnjoroge on 10/4/17.
  */
 @Parcel
-
 public class Post {
 
     private String title;

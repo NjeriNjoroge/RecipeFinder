@@ -14,9 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.gnjoroge.recipefinder.Constants;
 import com.example.gnjoroge.recipefinder.R;
 import com.example.gnjoroge.recipefinder.adapters.PostDetailAdapter;
 import com.example.gnjoroge.recipefinder.model.Post;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
@@ -26,6 +29,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class DiscussionForum extends AppCompatActivity {
+
+    private DatabaseReference mQuestion;
 
     //hiding the form fields after submit
     private boolean viewGroupIsVisible = true;
@@ -83,6 +88,13 @@ public class DiscussionForum extends AppCompatActivity {
 
                 Post post = new Post(title, author,body);
                 mAdapter.addPost(post);
+
+                if(view == mSubmitPost) {
+                    DatabaseReference postRef = FirebaseDatabase
+                            .getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_POSTS);
+                    postRef.push().setValue(mPosts);
+                }
 
                 //hiding the editText Fields
                 if(viewGroupIsVisible) {

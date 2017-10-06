@@ -80,7 +80,7 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Po
         public void onClick(View view) {
 
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, DiscussionForumFragment.class);
+            Intent intent = new Intent(mContext, DiscussionForum.class);
             intent.putExtra("position", itemPosition);
 //            intent.putExtra("posts", Parcel.wrap(mPosts));
             mContext.startActivity(intent);
