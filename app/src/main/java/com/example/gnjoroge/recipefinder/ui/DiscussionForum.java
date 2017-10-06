@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gnjoroge.recipefinder.Constants;
 import com.example.gnjoroge.recipefinder.R;
@@ -28,22 +30,19 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static java.security.AccessController.getContext;
+
+
 public class DiscussionForum extends AppCompatActivity {
 
     private DatabaseReference mQuestion;
-
-    //hiding the form fields after submit
-    private boolean viewGroupIsVisible = true;
-    private View mViewGroup;
-    private View mViewGroup1;
-    private View mViewGroup2;
 
     //displaying the questions
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     //getting the questions
     @Bind(R.id.inputAuthor) EditText mInputAuthor;
-    @Bind(R.id.inputTitle) EditText mInpuTitle;
+    @Bind(R.id.inputTitle) EditText mInputTitle;
     @Bind(R.id.inputBody) EditText mInputBody;
     @Bind(R.id.submitPost) Button mSubmitPost;
 
@@ -70,25 +69,43 @@ public class DiscussionForum extends AppCompatActivity {
 
         mSubmitPost.setOnClickListener(new View.OnClickListener() {
 
+
+
             @Override
             public void onClick(View view) {
 
-                //collect the ids for hiding the editText fields
-                mViewGroup = findViewById(R.id.titleField);
-                mViewGroup1 =  findViewById(R.id.bodyField);
-                mViewGroup2 =  findViewById(R.id.authorField);
+                String title = mInputTitle.getText().toString();
+                mInputTitle.setText("");
+                //validating field is not empty
+                if(TextUtils.isEmpty(title)) {
+                    mInputTitle.setError("Title cannot be left empty");
+                    return;
+                }
 
-                String title = mInpuTitle.getText().toString();
-                mInpuTitle.setText("");
                 String author = mInputAuthor.getText().toString();
                 mInputAuthor.setText("");
+                //validating field is not empty
+                if(TextUtils.isEmpty(author)) {
+                    mInputAuthor.setError("Author cannot be left empty");
+                    return;
+                }
+
                 String body = mInputBody.getText().toString();
                 mInputBody.setText("");
+                //validating field is not empty
+                if(TextUtils.isEmpty(body)) {
+                    mInputBody.setError("Body cannot be left empty");
+                    return;
+                }
+
                 String newPost = title + author + body;
 
                 Post post = new Post(title, author,body);
                 mAdapter.addPost(post);
 
+
+
+                //saving to Firebase
                 if(view == mSubmitPost) {
                     DatabaseReference postRef = FirebaseDatabase
                             .getInstance()
@@ -96,22 +113,10 @@ public class DiscussionForum extends AppCompatActivity {
                     postRef.push().setValue(mPosts);
                 }
 
-                //hiding the editText Fields
-                if(viewGroupIsVisible) {
-                    mViewGroup.setVisibility(View.GONE);
-                    mViewGroup1.setVisibility(View.GONE);
-                    mViewGroup2.setVisibility(View.GONE);
-                    mSubmitPost.setText("Ask Question");
-                } else {
-                    mViewGroup.setVisibility(View.VISIBLE);
-                    mViewGroup1.setVisibility(View.VISIBLE);
-                    mViewGroup2.setVisibility(View.VISIBLE);
-                    mSubmitPost.setText("Hide");
-                }
-
-                viewGroupIsVisible = !viewGroupIsVisible;
 
             }
+
+
         });
 
 

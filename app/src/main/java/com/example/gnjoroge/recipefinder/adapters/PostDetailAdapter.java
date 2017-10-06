@@ -92,6 +92,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailAdapter.Po
             mTitle.setText(post.getTitle());
             mBody.setText(post.getBody());
             mAuthor.setText(post.getAuthor());
+
+
         }
     }
 }
