@@ -8,7 +8,8 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.example.gnjoroge.recipefinder.ui.RecipeDisplay">
+    tools:context="com.example.gnjoroge.recipefinder.ui.RecipeDisplay"
+    android:background="@drawable/wallpaper">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

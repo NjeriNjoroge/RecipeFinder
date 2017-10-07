@@ -21,9 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RecipeDisplay"></activity>
+        <activity android:name=".ui.RecipeDisplay" />
         <activity android:name=".ui.DiscussionForum"></activity>
-        <activity android:name=".ui.SavedPostLayout"></activity>
     </application>
 
 </manifest>
